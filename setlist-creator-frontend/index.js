@@ -1,3 +1,6 @@
-let header = document.querySelector('header')
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-header.innerText ="Hi Mom"
+const header = document.querySelector('header');
+const allSongs = document.querySelector('.all-songs');
+
+
