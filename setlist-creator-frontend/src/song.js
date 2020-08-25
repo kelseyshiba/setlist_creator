@@ -25,6 +25,7 @@ class Song {
         editButton.addEventListener('click', updateSong)
         const delButton = document.querySelector(`#delete-song-${song.id}`)
         delButton.addEventListener('click', songsAdapter.deleteSong)
+        
         this.addButton()
     }
 

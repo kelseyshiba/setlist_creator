@@ -43,21 +43,6 @@ function updateSong(e){
     song.element.querySelector.append(formDiv)
 }
 
-function deleteSong(e){
-    let deleteId = { id: e.target.id.split("-")[2] }
 
-    let configObj = {
-        method: 'DELETE',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(deleteId)
-    }
-
-    fetch(SONGS_URL + `/${e.target.id.split("-")[2]}`, configObj)
-    .then(resp => resp.json())
-    .then(json => removeSong(json.data))
-}
 
 

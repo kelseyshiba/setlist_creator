@@ -36,14 +36,16 @@ class SongsAdapter {
     
         fetch('http://localhost:3000/songs', configObj)
         .then(resp => resp.json())
-        .then(json => new Song(json.data.attributes).renderSong(json.data.attributes))//new Song(json.data.attributres).renderSong(json.data.attributes));
+        .then(json => new Song(json.data.attributes).renderSong(json.data.attributes));
         
     }
     //UPDATE
-    
+
     //DELETE
     deleteSong(e){
         let deleteId = { id: e.target.id.split("-")[2] }
+        let delSongDiv = document.querySelector(`div#song-${e.target.id.split("-")[2]}`)
+        delSongDiv.remove();
         let configObj = {
             method: 'DELETE',
             headers: {
@@ -55,6 +57,6 @@ class SongsAdapter {
     
         fetch(`http://localhost:3000/songs/${parseInt(deleteId.id)}`, configObj)
         .then(resp => resp.json())
-        .then(json => document.querySelector(`#song-${deleteId.id}`).remove())
+        .then(json => console.log(json)) //fix
     }
 }
