@@ -5,3 +5,7 @@ header {
 .border {
     padding: 5px 0px 5px 5px;
 }
+
+#all-setlists div {
+    height: 220px;
+}
