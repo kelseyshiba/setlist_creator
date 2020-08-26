@@ -18,7 +18,7 @@ class Song {
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `${song.title} || ${song.artist} || ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
-        songDiv.classList.add('song');
+        songDiv.className = 'border border-secondary rounded';
         allSongs.appendChild(songDiv);
         //buttons
         const editButton = document.querySelector(`#update-song-${song.id}`)
