@@ -13,6 +13,7 @@ class Song {
     static findById(id){
         return Song.all.find(song => song.id == id)
     }
+    
     //{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
     renderSong(song){
         let songDiv = document.createElement('div')
