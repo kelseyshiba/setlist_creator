@@ -15,33 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     songsAdapter.fetchSongs();
 });
 
-function updateSong(e){
-    let songId = e.target.parentElement.id.split("-")[2]
-    let song = Song.findById(songId)
 
-    let songArr = e.target.parentNode.parentNode.innerText.split("||");
-    let songtitle = songArr[0]
-    let songArtist = songArr[1]
-    let songKey = songArr[2]
-
-    let updateForm = `<br>
-    <h3 text-center>Edit Song</h3>
-    <hr>
-    <form class='form-group'>
-        <label for="song[title]">Title:</label>
-        <input type="text" name='song[title]' class='form-control' value='${songTitle}'><br>
-        <label for="song[artist]">Artist:</label>
-        <input type="text" name="song[artist]" class="form-control" value='${songArtist}'><br>
-        <label for="song[key]">Key: </label>
-        <input type="text" name="song[key]" class="form-control" value='${songKey}'><br>
-        <input id="update-submit" type="submit" class='btn btn-success'>
-    </form>`
-
-    let formDiv = document.createElement('div');
-    formDiv.id = `update-form-${songId}`
-    formDiv.innerHTML = updateForm;
-    song.element.querySelector.append(formDiv)
-}
 
 
 

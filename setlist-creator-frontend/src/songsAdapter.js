@@ -40,6 +40,40 @@ class SongsAdapter {
         
     }
     //UPDATE
+    patchSong(e){
+        e.preventDefault()
+        const id = parseInt(e.currentTarget.id.split("-")[2])
+        let attributes = e.currentTarget.parentElement.children
+        const title = attributes[1].value
+        const artist = attributes[4].value
+        const key = attributes[7].value
+
+        let songObj = {
+            id,
+            title,
+            artist,
+            key
+        }
+
+        let configObj = {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify(songObj)
+        }
+
+        fetch(`http://localhost:3000/songs/${id}`, configObj)
+        .then(resp => resp.json())
+        .then(json => {
+            let song = Song.all.find(song => song.id == json.data.attributes.id)
+            song.updateOnDom(json.data.attributes)
+        })
+
+        let form = document.querySelector(`#update-form-${id}`);
+        form.remove();
+    }
 
     //DELETE
     deleteSong(e){
@@ -57,6 +91,6 @@ class SongsAdapter {
     
         fetch(`http://localhost:3000/songs/${parseInt(deleteId.id)}`, configObj)
         .then(resp => resp.json())
-        .then(json => console.log(json)) //fix
+        .then(json => json.message) //fix
     }
 }

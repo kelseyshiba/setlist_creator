@@ -18,10 +18,16 @@ class SongsController < ApplicationController
         end
     end
 
+    def update
+        song = Song.find_by_id(params[:id])
+        song.update(song_params)
+        render json: SongSerializer.new(song)
+    end
+
     def destroy
         song = Song.find_by_id(params[:id])
         song.destroy
-        render json: SongSerializer.new(song)
+        render json: {message: "Successfully deleted #{song.title}!"}
     end
 
     private
