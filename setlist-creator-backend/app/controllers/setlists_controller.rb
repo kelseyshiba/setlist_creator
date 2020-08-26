@@ -9,4 +9,10 @@ class SetlistsController < ApplicationController
         render json: SetlistSerializer.new(setlist)
     end
 
+    def destroy
+        setlist = Setlist.find_by_id(params[:id])
+        setlist.destroy
+        render json: {message: "Successfully deleted #{setlist.name}!"}
+    end
+
 end

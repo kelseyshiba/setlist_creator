@@ -91,6 +91,6 @@ class SongsAdapter {
     
         fetch(`http://localhost:3000/songs/${parseInt(deleteId.id)}`, configObj)
         .then(resp => resp.json())
-        .then(json => json.message) //fix
+        .then(json => alert(json.message))
     }
 }

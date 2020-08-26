@@ -14,13 +14,10 @@ const setlistsAdapter = new SetlistsAdapter
 document.addEventListener("DOMContentLoaded", () => {
     songsAdapter.fetchSongs();
     setlistsAdapter.fetchSetlists();
-    titleAdds();
+  
 });
 
-function titleAdds(){
-    const allSetlists = document.querySelector('#all-setlists')
-    allSetlists.innerHTML = `<h3 lead text-center>Set Lists</h3>`
-}
+
 
 
 
