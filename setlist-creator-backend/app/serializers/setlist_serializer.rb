@@ -1,4 +1,4 @@
 class SetlistSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :date, :name
+  attributes :date, :name, :id
 end
