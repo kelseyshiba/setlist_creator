@@ -5,7 +5,7 @@ const header = document.querySelector('header');
 const allSongs = document.querySelector('.all-songs');
 allSongs.innerHTML =`<h3 lead text-center>Songs</h3>`
 const addSongButton = document.createElement('button')
-const formToggle = document.querySelector('.form-toggle')
+const formToggle = document.querySelector('.form-toggle')// if use in 1 function, unless multiple js files
 const newForm = document.createElement('div');
 //keep
 const songsAdapter = new SongsAdapter
