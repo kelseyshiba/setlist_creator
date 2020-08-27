@@ -2,11 +2,13 @@ class SongsAdapter {
     constructor(){
         this.baseUrl = 'http://localhost:3000/songs'
     }
+    
     //GET
     fetchSongs(){
         fetch(this.baseUrl)
         .then(res => res.json())
-        .then(json => json.data.forEach(song => new Song(song.attributes).renderSong(song.attributes))); 
+        .then(json => json.data.forEach(song => new Song(song.attributes).renderSong(song.attributes)));
+    
     }
 //attributes: {title: "At Last", artist: "Etta James", key: "F"}
     

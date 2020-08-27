@@ -13,7 +13,12 @@ class Song {
     static findById(id){
         return Song.all.find(song => song.id == id)
     }
-    
+    static dragListeners(){
+        allSongs.addEventListener('dragover', this.dragover_handler)
+        allSongs.addEventListener('dragenter', this.dragenter_handler)
+        allSongs.addEventListener('dragleave', this.dragleave_handler)
+        allSongs.addEventListener('drop', this.drop_handler)
+    }
     //{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
     renderSong(song){
         let songDiv = document.createElement('div')
@@ -22,7 +27,7 @@ class Song {
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
         allSongs.appendChild(songDiv);
-        //buttons
+        //buttons and listeners
         const editButton = document.querySelector(`#update-song-${song.id}`)
         editButton.addEventListener('click', this.updateSongForm, true)
         
@@ -30,19 +35,25 @@ class Song {
         delButton.addEventListener('click', songsAdapter.deleteSong)
         songDiv.addEventListener('dragstart', this.dragstart_handler)
         songDiv.addEventListener('dragend', this.dragend_handler)
+        
         this.addButton()
+        let addSongButtonGrab = document.querySelector('#add-button')
+        addSongButtonGrab.addEventListener('click', this.newSongForm)
     }
 
     addButton(){
         addSongButton.innerHTML =`Add New Song`
+        addSongButton.id = 'add-button'
         addSongButton.className = `btn btn-primary`
+        const formToggle = document.querySelector('.form-toggle')
         formToggle.appendChild(addSongButton);
-        addSongButton.addEventListener('click', this.newSongForm)
     }
-
+    
     newSongForm(){
+        const addSongButton = document.querySelector('#add-button')
         addSongButton.style.display = 'none';
-        
+        const newForm = document.createElement('div');
+        const formToggle = document.querySelector('.form-toggle')
         formToggle.appendChild(newForm);
         newForm.id = 'add-form';
         newForm.style.display = 'block';
@@ -119,6 +130,31 @@ class Song {
 
     dragend_handler(e){
         //e is the div
+    }
+
+
+    //accept drops
+    static dragover_handler(e){
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    static dragleave_handler(e){
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    static drop_handler(e){
+        e.preventDefault()
+        console.log(e.target)
+        const data = e.dataTransfer.getData('text/plain');
+        console.log(e.target) //innersetlist div
+        e.target.appendChild(document.getElementById(data))
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    static dragenter_handler(e){
+        e.preventDefault()
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
     }
     
 }

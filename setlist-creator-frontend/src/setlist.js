@@ -16,6 +16,7 @@ class Setlist {
     static titleAdds(){
         const allSetlists = document.querySelector('#all-setlists')
         allSetlists.innerHTML = `<section class='title-section'><h3 lead text-center>Set Lists <button id='add-setlist' class='btn btn-success'>+</button></h3><section>`
+        
     }
   
     renderSetlist(setlist){
@@ -108,7 +109,7 @@ class Setlist {
         e.dataTransfer.dropEffect = 'move';
     }
 
-    dragleave_handler = (e) => {
+    dragleave_handler(e){
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
