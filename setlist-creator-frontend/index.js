@@ -14,7 +14,7 @@ const setlistsAdapter = new SetlistsAdapter
 document.addEventListener("DOMContentLoaded", () => {
     songsAdapter.fetchSongs();
     setlistsAdapter.fetchSetlists();
-  
+    
 });
 
 

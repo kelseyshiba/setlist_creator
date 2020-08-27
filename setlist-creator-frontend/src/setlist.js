@@ -22,6 +22,10 @@ class Setlist {
         const allSetlistsDiv = document.querySelector('#all-setlists')
         const setlistDiv = document.createElement('div')
         setlistDiv.id = `setlist-${setlist.id}`
+        setlistDiv.addEventListener('dragover', this.dragover_handler)
+        setlistDiv.addEventListener('dragenter', this.dragenter_handler)
+        setlistDiv.addEventListener('dragleave', this.dragleave_handler)
+        setlistDiv.addEventListener('drop', this.drop_handler)
         setlistDiv.className = `border border-secondary rounded`
         setlistDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p>${setlist.date}</p></div>`
 
@@ -98,5 +102,33 @@ class Setlist {
         const delButton = document.querySelector(`#delete-setlist-${setlist.id}`)
         delButton.addEventListener('click', setlistsAdapter.deleteSetlist) 
     }
+
+    dragover_handler(e){
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    dragleave_handler = (e) => {
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    drop_handler(e){
+        //this is the object
+        const data = e.dataTransfer.getData('text/plain');//song-1
+        console.log(e.target) //innersetlist div
+        e.target.appendChild(document.getElementById(data))
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    dragenter_handler(e){
+        e.preventDefault()
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    }
+
+    // onDrop(e){
+    //     const data = e.dataTransfer.getData('text/plain');
+    //     event.target.textContent = data
+    //     event.preventDefault();
+    // }
     
 }

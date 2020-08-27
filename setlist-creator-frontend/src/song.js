@@ -19,6 +19,7 @@ class Song {
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `${song.title} || ${song.artist} || ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
+        songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
         allSongs.appendChild(songDiv);
         //buttons
@@ -27,7 +28,8 @@ class Song {
         
         const delButton = document.querySelector(`#delete-song-${song.id}`)
         delButton.addEventListener('click', songsAdapter.deleteSong)
-        
+        songDiv.addEventListener('dragstart', this.dragstart_handler)
+        songDiv.addEventListener('dragend', this.dragend_handler)
         this.addButton()
     }
 
@@ -107,6 +109,16 @@ class Song {
         
         const delButton = document.querySelector(`#delete-song-${this.id}`)
         delButton.addEventListener('click', songsAdapter.deleteSong)
+    }
+
+    dragstart_handler(e){
+        //e is the div
+        e.dataTransfer.setData('text/plain', e.target.id)
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    dragend_handler(e){
+        //e is the div
     }
     
 }
