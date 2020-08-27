@@ -145,10 +145,8 @@ class Song {
 
     static drop_handler(e){
         e.preventDefault()
-        console.log(e.target)
         const data = e.dataTransfer.getData('text/plain');
-        console.log(e.target) //innersetlist div
-        e.target.appendChild(document.getElementById(data))
+        e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
