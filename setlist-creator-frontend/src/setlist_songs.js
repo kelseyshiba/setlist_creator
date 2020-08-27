@@ -1,4 +1,4 @@
-class SetlistSong {
+class SetlistSongs {
 
     static all = [];
 
@@ -9,4 +9,5 @@ class SetlistSong {
 
         SetlistSong.all.push(this)
     }
+
 }
