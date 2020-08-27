@@ -69,21 +69,21 @@ class Setlist {
         let setlist = Setlist.findById(e.currentTarget.id.split("-")[2])
         let updateForm = document.createElement('div')
         updateForm.id = `update-form-${setlist.id}`
+        updateForm.className = `update-form`
         updateForm.innerHTML = 
         `<form class='form-group'>
-        <h3 class='text-center'>Edit Setlist</h3><br>
+        <h4 class='text-center'>Edit Setlist</h4><br>
         
         <label class='control-label' for='date'>Date: (format YYYY-MM-DD)</label>
         <input class='form-control' type='text' name='setlist[date]' value='${setlist.date}'>
         <label class='control-label' for='name'>Name:</label>
         <input class='form-control' type='text' name='setlist[name]' value='${setlist.name}'>
         <input class='btn btn-success' type='submit' id='update-setlist-${setlist.id}'></form>`
-
+     
         let innerDiv = document.querySelector(`#inner-setlist-div-${setlist.id}`)
         innerDiv.style.display = 'none';
         let setlistDiv = document.querySelector(`#setlist-${setlist.id}`)
         setlistDiv.appendChild(updateForm)
-
         const updateButton = document.querySelector(`#update-setlist-${setlist.id}`)
         updateButton.addEventListener('click', setlistsAdapter.updateSetlist)
     }
