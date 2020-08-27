@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_040258) do
+ActiveRecord::Schema.define(version: 2020_08_27_044108) do
 
   create_table "setlist_songs", force: :cascade do |t|
     t.integer "song_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_040258) do
   end
 
   create_table "setlists", force: :cascade do |t|
-    t.datetime "date"
+    t.string "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
