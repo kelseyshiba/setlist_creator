@@ -116,8 +116,8 @@ class Setlist {
     drop_handler(e){
         //this is the object
         const data = e.dataTransfer.getData('text/plain');//song-1
-        console.log(e.target) //innersetlist div
-        e.target.appendChild(document.getElementById(data))
+        //target is innersetlist div
+        e.target.parentNode.parentNode.appendChild(document.getElementById(data))
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
@@ -125,11 +125,5 @@ class Setlist {
         e.preventDefault()
         this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
     }
-
-    // onDrop(e){
-    //     const data = e.dataTransfer.getData('text/plain');
-    //     event.target.textContent = data
-    //     event.preventDefault();
-    // }
     
 }
