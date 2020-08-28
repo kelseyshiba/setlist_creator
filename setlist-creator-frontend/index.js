@@ -7,6 +7,7 @@ const addSongButton = document.createElement('button')
 
 const songsAdapter = new SongsAdapter
 const setlistsAdapter = new SetlistsAdapter
+const setlistsongsAdapter = new SetlistSongsAdapter
 
 document.addEventListener("DOMContentLoaded", () => {
     songsAdapter.fetchSongs();

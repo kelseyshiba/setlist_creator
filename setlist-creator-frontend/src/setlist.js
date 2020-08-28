@@ -115,10 +115,10 @@ class Setlist {
 
     drop_handler(e){
         //this is the object
-        const data = e.dataTransfer.getData('text/plain');//song-1
-        //target is innersetlist div
-        e.target.parentNode.parentNode.appendChild(document.getElementById(data))
+        const data = e.dataTransfer.getData('text/plain', e.currentTarget.id);//song-1
+        e.currentTarget.appendChild(document.getElementById(data))
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        setlistsongsAdapter.createSetlistSong(e)
     }
 
     dragenter_handler(e){

@@ -124,6 +124,10 @@ class Song {
 
     dragstart_handler(e){
         //e is the div
+        //var foo = {
+            //songId: e.target.id
+        //}
+       // var j = JSON.stringify(foo);
         e.dataTransfer.setData('text/plain', e.target.id)
         e.dataTransfer.dropEffect = 'move';
     }
@@ -131,7 +135,7 @@ class Song {
     dragend_handler(e){
         //e is the div of the song-id-1
         //fetch to create relationship join table
-        setlistsongsAdapter.createSetlistSong(e)
+        //setlistsongsAdapter.createSetlistSong(e)
     }
 
 
@@ -150,6 +154,7 @@ class Song {
         const data = e.dataTransfer.getData('text/plain');
         e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        setlistsongsAdapter.deleteSetlistSong(e)
     }
 
     static dragenter_handler(e){

@@ -10,6 +10,22 @@ class SetlistSongsController < ApplicationController
     end
 
     def create
+        #"setlist_song"=>{"song_id"=>"1", "setlist_id"=>"1"}} 
+        setlistsong = SetlistSong.new(setlistsong_params)
+        if setlistsong.save
+            render json: SetlistSongSerializer.new(setlistsong)
+        else
+             alert('Setlist/Song Relationship not saved!')
+        end
+    end
+
+    def destroy
         byebug
+    end
+
+    private
+
+    def setlistsong_params
+        params.require(:setlist_song).permit(:setlist_id, :id, :song_id)
     end
 end
