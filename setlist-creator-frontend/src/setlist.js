@@ -118,7 +118,7 @@ class Setlist {
         const data = e.dataTransfer.getData('text/plain', e.currentTarget.id);//song-1
         e.currentTarget.appendChild(document.getElementById(data))
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        setlistsongsAdapter.createSetlistSong(e)
+        setlistsongsAdapter.createSetlistSong(e, this)
     }
 
     dragenter_handler(e){

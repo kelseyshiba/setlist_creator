@@ -20,7 +20,10 @@ class SetlistSongsController < ApplicationController
     end
 
     def destroy
-        byebug
+        #"setlist_song"=>{"id"=>"21"}}
+        setlistsong = SetlistSong.find_by_id(params[:id])
+        setlistsong.destroy
+        render json: SetlistSongSerializer.new(setlistsong)
     end
 
     private

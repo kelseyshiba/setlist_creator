@@ -123,12 +123,7 @@ class Song {
     }
 
     dragstart_handler(e){
-        //e is the div
-        //var foo = {
-            //songId: e.target.id
-        //}
-       // var j = JSON.stringify(foo);
-        e.dataTransfer.setData('text/plain', e.target.id)
+        e.dataTransfer.setData('text/plain', e.target.id)//e.target.id)
         e.dataTransfer.dropEffect = 'move';
     }
 
