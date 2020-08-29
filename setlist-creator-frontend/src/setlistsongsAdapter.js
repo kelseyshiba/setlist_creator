@@ -4,7 +4,6 @@ class SetlistSongsAdapter {
     }
     //CREATE
     createSetlistSong(e){
-        //setlist id//song id and connecting them
         const setlistId = e.currentTarget.id.split("-")[1]
         const songId = e.currentTarget.lastElementChild.id.split("-")[1]
 
@@ -25,9 +24,9 @@ class SetlistSongsAdapter {
         fetch('http://localhost:3000/setlist_songs', configObj)
         .then(resp => resp.json())
         .then(json => {
-            let songId = json.data.attributes.song.id
+            let songId = json.data.attributes.song_id
             let song = document.querySelector(`#song-${songId}`)
-            let setlistId = json.data.attributes.setlist.id
+            let setlistId = json.data.attributes.setlist_id
             let setlist = document.querySelector(`#setlist-${setlistId}`)
             song.id = `song-${json.data.attributes.song.id}-${json.data.attributes.id}`
             setlist.id = `setlist-${json.data.attributes.setlist.id}-${json.data.attributes.id}`

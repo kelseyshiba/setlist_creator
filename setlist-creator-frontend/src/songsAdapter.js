@@ -7,8 +7,9 @@ class SongsAdapter {
     fetchSongs(){
         fetch(this.baseUrl)
         .then(res => res.json())
-        .then(json => json.data.forEach(song => new Song(song.attributes).renderSong(song.attributes)));
-    
+        .then(json => {
+            json.data.sort(function (a, b) { if(a.attributes.title > b.attributes.title) {return 1} else if (a.attributes.title < b.attributes.title) { return -1 } return 0; }).forEach(song => new Song(song.attributes).renderSong(song.attributes))
+        })
     }
 //attributes: {title: "At Last", artist: "Etta James", key: "F"}
     
