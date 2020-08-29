@@ -1,4 +1,4 @@
-## Javascript Set List Creator
+## Javascript Set List Creator with API
 This project was built for musicians wanting to create setlists quickly and easily that are modifiable and user friendly. You can add, edit, update, and delete any song and any setlist.  You can also drag and drop songs onto setlists/and or remove them.
 
 ## Installation && Getting Started
@@ -34,6 +34,11 @@ To pull up the interactive console
 $ rails c OR rails console
 
 Run Control + C to stop the server at any time.
+
+Once the server is running, you can visit the APIs as follows:
+localhost:3000/songs or /songs/id to view all or just one song
+localhost:3000/setlists or setlists/id to view all or just one setlist
+locatlhost:3000/setlist_songs or setlist_songs/id to view all of the join table or one entry
 
 ## Built With
 Ruby version 2.6.1p33
