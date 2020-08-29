@@ -128,9 +128,7 @@ class Song {
     }
 
     dragend_handler(e){
-        //e is the div of the song-id-1
-        //fetch to create relationship join table
-        //setlistsongsAdapter.createSetlistSong(e)
+       
     }
 
 
