@@ -116,9 +116,17 @@ class Setlist {
 
     drop_handler(e){
         //this is the object
-        const data = e.dataTransfer.getData('text/plain', e.currentTarget.id);//song-1
-        e.currentTarget.appendChild(document.getElementById(data))
+        e.preventDefault()
+        const song_id = e.dataTransfer.getData('text/plain');//song-1
+        e.currentTarget.appendChild(document.getElementById(song_id))
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        // let drop_target = e.target
+        // let drag_target = document.querySelector(`#${song_id}`)
+        // let temp = document.createElement('span');
+        // temp.className = 'hide';
+        // drop_target.before(temp)
+        // drag_target.before(drop_target)
+        // temp.replaceWith(drag_target);
         setlistsongsAdapter.createSetlistSong(e, this)
     }
 
@@ -146,16 +154,5 @@ class Setlist {
         myWindow.close();
     
         return true;
-        // allSongs.style.display = 'none';
-        // addSongButton.style.display = 'none';
-        // let allSetlistsDiv = document.querySelector('#all-setlists')
-        // let allButtons = allSetlistsDiv.querySelectorAll('button')
-        // for (let i = 0; i < allButtons.length; i++){
-        //     allButtons[i].style.display = 'none';
-        // }
-        // let header = document.querySelector('header')
-        // header.style.display = 'none';
-        // window.print()
-        // setTimeout(window.close(), 100)
     }
 }
