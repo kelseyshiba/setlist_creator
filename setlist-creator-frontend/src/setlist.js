@@ -15,8 +15,9 @@ class Setlist {
 
     static titleAdds(){
         const allSetlists = document.querySelector('#all-setlists')
-        allSetlists.innerHTML = `<section class='title-section'><h3 lead text-center>Set Lists <button id='add-setlist' class='btn btn-success'>+</button></h3><section>`
-        
+        allSetlists.innerHTML = `<section class='title-section'><h3 lead text-center>Set Lists <button id='add-setlist' class='btn btn-success'>+</button><button id='print-setlist' class='btn btn-secondary'><i class="fas fa-print"></i></button></h3><section>`
+        const print = document.querySelector(`#print-setlist`)
+        print.addEventListener('click', this.printSet)
     }
   
     renderSetlist(setlist){
@@ -126,4 +127,35 @@ class Setlist {
         this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
     }
     
+    static printSet(e){
+        let myWindow = window.open('', 'PRINT', 'height=400, width=600')
+
+        myWindow.document.write(`<html><head><title>` + document.title + '</title>');
+        myWindow.document.write('</head><body >');
+        myWindow.document.write('<h1>' + document.title  + '</h1>');
+        myWindow.document.write(document.getElementById('all-setlists').innerHTML);
+        let buttons = myWindow.document.querySelectorAll('button')
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.display = 'none';
+        }
+        myWindow.document.write('</body></html>');
+        myWindow.document.close(); // necessary for IE >= 10
+        myWindow.focus(); // necessary for IE >= 10*/
+    
+        myWindow.print();
+        myWindow.close();
+    
+        return true;
+        // allSongs.style.display = 'none';
+        // addSongButton.style.display = 'none';
+        // let allSetlistsDiv = document.querySelector('#all-setlists')
+        // let allButtons = allSetlistsDiv.querySelectorAll('button')
+        // for (let i = 0; i < allButtons.length; i++){
+        //     allButtons[i].style.display = 'none';
+        // }
+        // let header = document.querySelector('header')
+        // header.style.display = 'none';
+        // window.print()
+        // setTimeout(window.close(), 100)
+    }
 }
