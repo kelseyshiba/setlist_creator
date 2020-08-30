@@ -23,13 +23,16 @@ class SetlistSongsAdapter {
 
         fetch('http://localhost:3000/setlist_songs', configObj)
         .then(resp => resp.json())
-        .then(json => {
+        .then(json => //console.log(json.data.attributes.setlist_id))
+            {
             let songId = json.data.attributes.song_id
             let song = document.querySelector(`#song-${songId}`)
             let setlistId = json.data.attributes.setlist_id
             let setlist = document.querySelector(`#setlist-${setlistId}`)
-            song.id = `song-${json.data.attributes.song.id}-${json.data.attributes.id}`
-            setlist.id = `setlist-${json.data.attributes.setlist.id}-${json.data.attributes.id}`
+            if (song.id !== `song-${songId}-${setlistId}`) {
+                song.id = `song-${songId}-${setlistId}`
+            }
+            //setlist.id = `setlist-${setlistId}-${songId}`
         })      
     }
 
@@ -52,14 +55,15 @@ class SetlistSongsAdapter {
 
         fetch(`http://localhost:3000/setlist_songs/${setlistSongIdNum}`, configObj)
         .then(resp => resp.json())
-        .then(json => {
-            let songId = json.data.attributes.song.id
-            let song = document.querySelector(`#song-${songId}-${json.data.attributes.id}`)
-            let setlistId = json.data.attributes.setlist.id
-            let setlist = document.querySelector(`#setlist-${setlistId}-${json.data.attributes.id}`)
-            song.id = `song-${songId}`
-            setlist.id = `setlist-${setlistId}`
-            alert('Relationship removed')
-        })
+        .then(json => console.log(json.data.attributes.setlist_id))
+            //{
+        //     let songId = json.data.attributes.song_id
+        //     let song = document.querySelector(`#song-${songId}-${json.data.attributes.id}`)
+        //     let setlistId = json.data.attributes.setlist.id
+        //     let setlist = document.querySelector(`#setlist-${setlistId}-${json.data.attributes.id}`)
+        //     song.id = `song-${songId}`
+        //     setlist.id = `setlist-${setlistId}`
+        //     alert('Relationship removed')
+        // })
     }
 }
