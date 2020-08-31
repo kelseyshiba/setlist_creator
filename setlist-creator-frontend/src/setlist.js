@@ -133,12 +133,12 @@ class Setlist {
         //drop_target.before(temp)
         drag_target.before(drop_target)
         //temp.replaceWith(drag_target);
-        setlistsongsAdapter.createSetlistSong(e, this)
+        setlistsongsAdapter.createSetlistSong(e)
     }
 
     dragenter_handler(e){
-        e.preventDefault()
-        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+        //e.preventDefault()
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     }
     
     static printSet(e){

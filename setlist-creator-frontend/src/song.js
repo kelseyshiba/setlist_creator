@@ -124,7 +124,7 @@ class Song {
 
     dragstart_handler(e){
         e.dataTransfer.setData('text/plain', e.target.id)//e.target.id)
-        //e.dataTransfer.dropEffect = 'move';
+        e.dataTransfer.dropEffect = 'move';
     }
 
     dragend_handler(e){
@@ -135,7 +135,7 @@ class Song {
     //accept drops
     static dragover_handler(e){
         e.preventDefault();
-        //e.dataTransfer.dropEffect = 'move';
+        e.dataTransfer.dropEffect = 'move';
     }
 
     static dragleave_handler(e){
@@ -144,6 +144,7 @@ class Song {
 
     static drop_handler(e){
         e.preventDefault()
+        debugger
         const data = e.dataTransfer.getData('text/plain');
         e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
