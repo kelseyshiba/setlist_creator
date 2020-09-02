@@ -115,25 +115,26 @@ class Setlist {
     }
 
     drop_handler(e){
-        //this is the object
         e.preventDefault()
-        //attaches to set list
-        const song_id = e.dataTransfer.getData('text/plain');//song-1
-        e.currentTarget.appendChild(document.getElementById(song_id))
-        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-
-        //allows switch positions
+        const song_id = e.dataTransfer.getData('text/plain');
         let songSetDiv = document.getElementById(song_id)
-        songSetDiv.className = 'border border-secondary rounded inset';
-        
-        let drop_target = songSetDiv
-        let drag_target = document.querySelector(`#${song_id}`)
-        //let temp = document.createElement('span');
-        //temp.className = 'hide';
-        //drop_target.before(temp)
-        drag_target.before(drop_target)
-        //temp.replaceWith(drag_target);
-        setlistsongsAdapter.createSetlistSong(e)
+        // drag_target.before(drop_target)
+        if (song_id === `song-${song_id.split("-")[1]}`) {
+            e.currentTarget.appendChild(document.getElementById(song_id))
+            this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            setlistsongsAdapter.createSetlistSong(e) 
+        } else {
+            //songSetDiv.className = 'border border-secondary rounded inset';
+            
+            let tmp = document.createElement('div');
+            tmp.className = 'hide';
+            songSetDiv.insertBefore(songSetDiv.nextSibling, songSetDiv.firstElementChild)
+
+            // let currentSetlist = document.getElementById(`${e.currentTarget.id}`)
+            // currentTarget.append(tmp)
+            // let drag_target = songSetDiv
+            // tmp.replaceWith(drag_target);
+        } 
     }
 
     dragenter_handler(e){

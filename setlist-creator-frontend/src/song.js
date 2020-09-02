@@ -19,7 +19,7 @@ class Song {
         allSongs.addEventListener('dragleave', this.dragleave_handler)
         allSongs.addEventListener('drop', this.drop_handler)
     }
-    //{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
+    
     renderSong(song){
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `${song.title} || ${song.artist} || ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
@@ -27,7 +27,7 @@ class Song {
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
         allSongs.appendChild(songDiv);
-        //buttons and listeners
+       
         const editButton = document.querySelector(`#update-song-${song.id}`)
         editButton.addEventListener('click', this.updateSongForm, true)
         
@@ -74,8 +74,7 @@ class Song {
         submitButton.addEventListener('click', songsAdapter.createSong)
     }
 
-    updateSongForm(e){
-        //console.log(this) button id update song 
+    updateSongForm(e){ 
         let songId = parseInt(e.currentTarget.id.split("-")[2])
         let song = Song.findById(songId)
         let songDivUpdate = document.querySelector(`#song-${songId}`)
@@ -105,7 +104,7 @@ class Song {
         let updateSubmit = document.querySelector(`#update-submit-${songId}`)
         updateSubmit.addEventListener('click', songsAdapter.patchSong)
     }
-//{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
+
     updateOnDom({id, title, artist, key}){
         this.id = id
         this.title = title
@@ -123,7 +122,7 @@ class Song {
     }
 
     dragstart_handler(e){
-        e.dataTransfer.setData('text/plain', e.target.id)//e.target.id)
+        e.dataTransfer.setData('text/plain', e.target.id)
         e.dataTransfer.dropEffect = 'move';
     }
 
@@ -144,7 +143,6 @@ class Song {
 
     static drop_handler(e){
         e.preventDefault()
-        debugger
         const data = e.dataTransfer.getData('text/plain');
         e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';

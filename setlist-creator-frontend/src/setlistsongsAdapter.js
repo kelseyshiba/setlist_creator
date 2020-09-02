@@ -29,10 +29,8 @@ class SetlistSongsAdapter {
             let song = document.querySelector(`#song-${songId}`)
             let setlistId = json.data.attributes.setlist_id
             let setlist = document.querySelector(`#setlist-${setlistId}`)
-            if (song.id !== `song-${songId}-${setlistId}`) {
-                song.id = `song-${songId}-${setlistId}`
-            }
-            //setlist.id = `setlist-${setlistId}-${songId}`
+            song.id = `song-${songId}-${setlistId}`
+            
         })      
     }
 
