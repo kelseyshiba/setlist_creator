@@ -15,7 +15,7 @@ header h1 {
     padding: 5px 0px 5px 5px;
 }
 
-#all-setlists div {
+#all-setlists-title div {
     width: 100%;
     border: solid 1px #ccc;
     min-height: 20%;
