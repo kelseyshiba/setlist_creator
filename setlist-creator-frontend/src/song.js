@@ -13,6 +13,7 @@ class Song {
     static findById(id){
         return Song.all.find(song => song.id == id)
     }
+    
     static dragListeners(){
         allSongs.addEventListener('dragover', this.dragover_handler)
         allSongs.addEventListener('dragenter', this.dragenter_handler)
@@ -22,10 +23,12 @@ class Song {
     
     renderSong(song){
         let songDiv = document.createElement('div')
-        songDiv.innerHTML = `${song.title} || ${song.artist} || ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
+        songDiv.innerHTML = `<i class="fas fa-grip-vertical"></i>     
+        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
+        songDiv.addEventListener('ondrop', this.ondrop_handler)
         allSongs.appendChild(songDiv);
        
         const editButton = document.querySelector(`#update-song-${song.id}`)
@@ -126,12 +129,12 @@ class Song {
         e.dataTransfer.dropEffect = 'move';
     }
 
-    dragend_handler(e){
+    // dragend_handler(e){
        
-    }
+    // }
 
 
-    //accept drops
+    //accept drops for the allSongDiv (class)
     static dragover_handler(e){
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
@@ -141,6 +144,11 @@ class Song {
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
+    static dragenter_handler(e){
+        e.preventDefault()
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    }
+
     static drop_handler(e){
         e.preventDefault()
         const data = e.dataTransfer.getData('text/plain');
@@ -148,10 +156,10 @@ class Song {
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
         setlistsongsAdapter.deleteSetlistSong(e)
     }
-
-    static dragenter_handler(e){
+    //prevent drop on song instance
+    ondrop_handler(e){
+        console.log(e)
         e.preventDefault()
-        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
     }
     
 }
