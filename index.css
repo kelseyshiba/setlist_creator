@@ -1,0 +1,47 @@
+header {
+    color: white;
+    background-image: url('./images/headersetlist.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 25vh;
+}
+
+header h1 {
+    padding: 40px;
+}
+
+.border {
+    padding: 5px 0px 5px 5px;
+}
+
+#all-setlists-title div {
+    width: 100%;
+    border: solid 1px #ccc;
+    min-height: 20%;
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.all-song {
+    width: 50%;
+    border: solid 1px #ccc;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+/* div.update-form {
+   height: auto;
+   overflow: scroll;
+   max-height:400px;
+} */
