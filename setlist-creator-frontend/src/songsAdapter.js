@@ -80,8 +80,8 @@ class SongsAdapter {
 
     //DELETE
     deleteSong(e){
-        let deleteId = { id: e.target.id.split("-")[2] }
-        let delSongDiv = document.querySelector(`div#song-${e.target.id.split("-")[2]}`)
+        let deleteId = e.currentTarget.id.split("-")[2]
+        let delSongDiv = document.querySelector(`div#song-${deleteId}`)
         delSongDiv.remove();
         let configObj = {
             method: 'DELETE',
@@ -92,7 +92,7 @@ class SongsAdapter {
             body: JSON.stringify(deleteId)
         }
     
-        fetch(`http://localhost:3000/songs/${parseInt(deleteId.id)}`, configObj)
+        fetch(`http://localhost:3000/songs/${deleteId}`, configObj)
         .then(resp => resp.json())
         .then(json => alert(json.message))
     }
