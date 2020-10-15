@@ -119,6 +119,8 @@ class Setlist {
             setlistsongsAdapter.createSetlistSong(e)
         
         } else {
+            //songSetDiv.className = 'border border-secondary rounded inset';
+           
             let tmp = document.createElement('div');
             tmp.className = 'hide';
             console.log("this is the div", songSetDiv)// drag target
@@ -128,6 +130,12 @@ class Setlist {
             drop_target.before(tmp)
             drag_target.before(drop_target)
             tmp.replaceWith(drag_target)
+            //songSetDiv.insertBefore(songSetDiv.nextSibling, songSetDiv.firstElementChild)
+
+            // let currentSetlist = document.getElementById(`${e.currentTarget.id}`)
+            // currentTarget.append(tmp)
+            // let drag_target = songSetDiv
+            // tmp.replaceWith(drag_target);
         } 
     }
     ondrop_handler(e){
