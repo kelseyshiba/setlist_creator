@@ -10,7 +10,6 @@ class SetlistsAdapter {
     .then(json => {
         json.data.forEach(setlist => new Setlist(setlist.attributes).renderSetlist(setlist.attributes))
         })
-        Setlist.titleAdds();
     }
     //CREATE
     createSetlist(e){

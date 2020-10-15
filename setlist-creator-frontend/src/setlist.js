@@ -13,32 +13,25 @@ class Setlist {
         return Setlist.all.find(setlist => setlist.id == Id)
     }
 
-    static titleAdds(){
-        const allSetlists = document.querySelector('#all-setlists')
-        allSetlists.innerHTML = `<section class='title-section'><h3 lead text-center>Set Lists <button id='add-setlist' class='btn btn-success'>+</button><button id='print-setlist' class='btn btn-secondary'><i class="fas fa-print"></i></button></h3><section>`
-        const print = document.querySelector(`#print-setlist`)
-        print.addEventListener('click', this.printSet)
-    }
-  
     renderSetlist(setlist){
-        const allSetlistsDiv = document.querySelector('#all-setlists')
+
         const setlistDiv = document.createElement('div')
         setlistDiv.id = `setlist-${setlist.id}`
         setlistDiv.addEventListener('dragover', this.dragover_handler)
         setlistDiv.addEventListener('dragenter', this.dragenter_handler)
         setlistDiv.addEventListener('dragleave', this.dragleave_handler)
         setlistDiv.addEventListener('drop', this.drop_handler)
-        setlistDiv.className = `border border-secondary rounded`
-        setlistDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p>${setlist.date}</p></div>`
+        setlistDiv.className = `setlist border border-secondary rounded`
+        setlistDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p class='text-center'>${setlist.date}</p><br></div>`
 
-        allSetlistsDiv.appendChild(setlistDiv)
+        allSetlists.appendChild(setlistDiv)
 
         const updateButton = document.querySelector(`#edit-setlist-${setlist.id}`)
         updateButton.addEventListener('click', this.updateSetlistForm)
         const delButton = document.querySelector(`#delete-setlist-${setlist.id}`)
         delButton.addEventListener('click', setlistsAdapter.deleteSetlist) 
         
-        this.addListeners(); 
+        this.addListeners();
     }
 
     addListeners(){
@@ -122,13 +115,22 @@ class Setlist {
         if (song_id === `song-${song_id.split("-")[1]}`) {
             e.currentTarget.appendChild(document.getElementById(song_id))
             this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-            setlistsongsAdapter.createSetlistSong(e) 
+            //remove the edit and delete buttons
+            setlistsongsAdapter.createSetlistSong(e)
+        
         } else {
             //songSetDiv.className = 'border border-secondary rounded inset';
-            
+           
             let tmp = document.createElement('div');
             tmp.className = 'hide';
-            songSetDiv.insertBefore(songSetDiv.nextSibling, songSetDiv.firstElementChild)
+            console.log("this is the div", songSetDiv)// drag target
+            console.log(songSetDiv.nextSibling) //drop target
+            let drop_target = songSetDiv.nextSibling
+            let drag_target = songSetDiv
+            drop_target.before(tmp)
+            drag_target.before(drop_target)
+            tmp.replaceWith(drag_target)
+            //songSetDiv.insertBefore(songSetDiv.nextSibling, songSetDiv.firstElementChild)
 
             // let currentSetlist = document.getElementById(`${e.currentTarget.id}`)
             // currentTarget.append(tmp)
@@ -136,7 +138,10 @@ class Setlist {
             // tmp.replaceWith(drag_target);
         } 
     }
-
+    ondrop_handler(e){
+        e.preventDefault()
+        console.log("ondropevent", e.currentTarget)
+    }
     dragenter_handler(e){
         //e.preventDefault()
         this.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
@@ -162,4 +167,5 @@ class Setlist {
     
         return true;
     }
+
 }
