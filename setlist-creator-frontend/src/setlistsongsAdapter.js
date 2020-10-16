@@ -23,20 +23,17 @@ class SetlistSongsAdapter {
 
         fetch('http://localhost:3000/setlist_songs', configObj)
         .then(resp => resp.json())
-        .then(json => //console.log(json.data.attributes.setlist_id))
-            {
-            let songId = json.data.attributes.song_id
-            let song = document.querySelector(`#song-${songId}`)
-            let setlistId = json.data.attributes.setlist_id
-            let setlist = document.querySelector(`#setlist-${setlistId}`)
-            song.id = `song-${songId}-${setlistId}`
-            
-        })      
+        .then(json => {
+             let songId = json.data.attributes.song_id
+             let song = document.querySelector(`#song-${songId}`)
+             song.id = `setlist-song-${json.data.id}`
+         })
     }
 
     //DELETE
     deleteSetlistSong(e){
-        let setlistSongIdNum = parseInt(e.currentTarget.lastElementChild.id.split("-")[2])
+        console.log("begin delete", e.currentTarget.lastElementChild.id.split("-")[2])
+        let setlistSongIdNum = e.currentTarget.lastElementChild.id.split("-")[2]
 
         let setlistSongId = {
             id: setlistSongIdNum
@@ -53,15 +50,11 @@ class SetlistSongsAdapter {
 
         fetch(`http://localhost:3000/setlist_songs/${setlistSongIdNum}`, configObj)
         .then(resp => resp.json())
-        .then(json => console.log(json.data.attributes.setlist_id))
-            //{
-        //     let songId = json.data.attributes.song_id
-        //     let song = document.querySelector(`#song-${songId}-${json.data.attributes.id}`)
-        //     let setlistId = json.data.attributes.setlist.id
-        //     let setlist = document.querySelector(`#setlist-${setlistId}-${json.data.attributes.id}`)
-        //     song.id = `song-${songId}`
-        //     setlist.id = `setlist-${setlistId}`
-        //     alert('Relationship removed')
-        // })
+        .then(json => {
+             let songId = json.data.attributes.song_id
+             let song = document.querySelector(`#setlist-song-${json.data.id}`)
+             song.id = `song-${songId}`
+             alert('Song removed')
+        })
     }
 }

@@ -111,18 +111,16 @@ class Setlist {
         e.preventDefault()
         const song_id = e.dataTransfer.getData('text/plain');
         let songSetDiv = document.getElementById(song_id)
-        // drag_target.before(drop_target)
         if (song_id === `song-${song_id.split("-")[1]}`) {
             e.currentTarget.appendChild(document.getElementById(song_id))
             this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-            //remove the edit and delete buttons
+            songSetDiv.children[4].style.display = 'none';
+            songSetDiv.children[5].style.display = 'none';
             setlistsongsAdapter.createSetlistSong(e)
         
         } else {
             let tmp = document.createElement('div');
             tmp.className = 'hide';
-            console.log("this is the div", songSetDiv)// drag target
-            console.log(songSetDiv.nextSibling) //drop target
             let drop_target = songSetDiv.nextSibling
             let drag_target = songSetDiv
             drop_target.before(tmp)
