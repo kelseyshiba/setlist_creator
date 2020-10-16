@@ -32,7 +32,6 @@ class SetlistSongsAdapter {
 
     //DELETE
     deleteSetlistSong(e){
-        console.log("begin delete", e.currentTarget.lastElementChild.id.split("-")[2])
         let setlistSongIdNum = e.currentTarget.lastElementChild.id.split("-")[2]
 
         let setlistSongId = {

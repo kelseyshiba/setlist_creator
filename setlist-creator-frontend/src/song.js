@@ -159,6 +159,15 @@ class Song {
         song.children[4].style.display = '';
         song.children[5].style.display = '';
         setlistsongsAdapter.deleteSetlistSong(e)
+
+        for (div of allSongs.children){
+            console.log(div.innerText.split("♦")[0])
+        }
+        // allSongs.children.forEach(songDiv => {
+        //     console.log(songDiv.innerText.split(("♦")[0])
+        // })
+       
+        //grab everything and sort it
     }
     //prevent drop on song instance
     ondrop_handler(e){
