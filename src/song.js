@@ -1,10 +1,11 @@
 class Song {
     static all = []
 
-    constructor({title, artist, key, id}){
+    constructor({title, artist, key, tempo, id}){
         this.title = title
         this.artist = artist
-        this.key = key 
+        this.key = key
+        this.tempo = tempo
         this.id = id
 
         Song.all.push(this);
@@ -24,7 +25,7 @@ class Song {
     renderSong(song){
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `<i class="fas fa-grip-vertical"></i>     
-        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
+        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <span>&#9830</span> ${song.tempo} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
@@ -154,7 +155,19 @@ class Song {
         const data = e.dataTransfer.getData('text/plain');
         e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        let song = document.querySelector(`#${data}`)
+        song.children[4].style.display = '';
+        song.children[5].style.display = '';
         setlistsongsAdapter.deleteSetlistSong(e)
+
+        for (div of allSongs.children){
+            console.log(div.innerText.split("♦")[0])
+        }
+        // allSongs.children.forEach(songDiv => {
+        //     console.log(songDiv.innerText.split(("♦")[0])
+        // })
+       
+        //grab everything and sort it
     }
     //prevent drop on song instance
     ondrop_handler(e){

@@ -11,7 +11,6 @@ class SongsAdapter {
             json.data.sort(function (a, b) { if(a.attributes.title > b.attributes.title) {return 1} else if (a.attributes.title < b.attributes.title) { return -1 } return 0; }).forEach(song => new Song(song.attributes).renderSong(song.attributes))
         })
     }
-//attributes: {title: "At Last", artist: "Etta James", key: "F"}
     
     //CREATE
     createSong(e){
@@ -20,7 +19,6 @@ class SongsAdapter {
         let formHide = document.querySelector('#add-form')
         formHide.style.display = 'none';
         let songTarget = e.target.parentNode.children 
-        //attributes: {artist, key, title}}
     
         let newSong = {
             title: songTarget[1].value,

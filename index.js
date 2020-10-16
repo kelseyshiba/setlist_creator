@@ -1,7 +1,8 @@
 const header = document.querySelector('header');
 
 const allSongs = document.querySelector('.all-songs');
-allSongs.innerHTML =`<h3 lead text-center>Songs</h3>`;
+const allSongsTitle = document.querySelector('#all-songs-title')
+allSongsTitle.innerHTML = `<h3 lead text-center>Songs</h3>`
 const addSongButton = document.createElement('button')
 
 const allSetlists = document.querySelector('#all-setlists')
