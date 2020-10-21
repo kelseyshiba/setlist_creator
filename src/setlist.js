@@ -90,7 +90,7 @@ class Setlist {
         this.date = setlist.date
         let innerDiv = document.querySelector(`#inner-setlist-div-${setlist.id}`)
         innerDiv.style.display = 'block';
-        innerDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p>${setlist.date}</p></div>`
+        innerDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p class='text-center'>${setlist.date}</p></div>`
         
         const updateButton = document.querySelector(`#edit-setlist-${setlist.id}`)
         updateButton.addEventListener('click', this.updateSetlistForm)
