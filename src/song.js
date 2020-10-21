@@ -14,7 +14,7 @@ class Song {
     static findById(id){
         return Song.all.find(song => song.id == id)
     }
-    
+    //Events for ALL SONG CONTAINER
     static dragListeners(){
         allSongs.addEventListener('dragover', this.dragover_handler)
         allSongs.addEventListener('dragenter', this.dragenter_handler)
@@ -22,6 +22,7 @@ class Song {
         allSongs.addEventListener('drop', this.drop_handler)
     }
     
+    //Attaching song to DOM
     renderSong(song){
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `<i class="fas fa-grip-vertical"></i>     
@@ -45,6 +46,7 @@ class Song {
         addSongButtonGrab.addEventListener('click', this.newSongForm)
     }
 
+    //New Song Form
     addButton(){
         addSongButton.innerHTML =`Add New Song`
         addSongButton.id = 'add-button'
@@ -53,6 +55,7 @@ class Song {
         formToggle.appendChild(addSongButton);
     }
     
+    //Render Form
     newSongForm(){
         const addSongButton = document.querySelector('#add-button')
         addSongButton.style.display = 'none';
@@ -78,14 +81,17 @@ class Song {
         submitButton.addEventListener('click', songsAdapter.createSong)
     }
 
+    //Editing a Song
     updateSongForm(e){ 
         let songId = parseInt(e.currentTarget.id.split("-")[2])
         let song = Song.findById(songId)
         let songDivUpdate = document.querySelector(`#song-${songId}`)
-        let songArr = e.currentTarget.parentNode.innerText.split("||");
+        let songArr = e.currentTarget.parentNode.innerText.split("♦");
+
         let songTitle = songArr[0]
         let songArtist = songArr[1]
         let songKey = songArr[2]
+        let songTempo = songArr[3]
     
         let updateForm = `<br>
         <h3 text-center>Edit Song</h3>
@@ -97,6 +103,7 @@ class Song {
             <input type="text" name="song[artist]" class="form-control" value='${songArtist}'><br>
             <label for="song[key]">Key: </label>
             <input type="text" name="song[key]" class="form-control" value='${songKey}'><br>
+            <input type="text" name="song[tempo]" class="form-control" value='${songTempo}'><br>
             <input id="update-submit-${songId}" type="submit" class='btn btn-success'>
         </form>`
     
@@ -109,14 +116,16 @@ class Song {
         updateSubmit.addEventListener('click', songsAdapter.patchSong)
     }
 
-    updateOnDom({id, title, artist, key}){
+    //render update
+    updateOnDom({id, title, artist, key, tempo}){
         this.id = id
         this.title = title
         this.artist = artist
         this.key = key
+        this.tempo = tempo
         
         let grabSong = document.querySelector(`div#song-${this.id}`)
-        grabSong.innerHTML = `${this.title} || ${this.artist} || ${this.key} <button id='update-song-${this.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${this.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`
+        grabSong.innerHTML = `${this.title} ♦ ${this.artist} ♦ ${this.key} ♦ ${this.tempo}<button id='update-song-${this.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${this.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`
 
         const editButton = document.querySelector(`#update-song-${this.id}`)
         editButton.addEventListener('click', this.updateSongForm, true)
@@ -160,12 +169,10 @@ class Song {
         song.children[5].style.display = '';
         setlistsongsAdapter.deleteSetlistSong(e)
 
-        for (div of allSongs.children){
-            console.log(div.innerText.split("♦")[0])
-        }
-        // allSongs.children.forEach(songDiv => {
-        //     console.log(songDiv.innerText.split(("♦")[0])
-        // })
+        // let songList = allSongs.children
+        // songList = Array.prototype.slice.call(songList)
+       
+        // console.log(songList.sort((a,b)=> a.innerText.split("♦")[0]-b.innerText.split("♦")[0]))
        
         //grab everything and sort it
     }
