@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_204103) do
+ActiveRecord::Schema.define(version: 2021_01_10_234502) do
 
   create_table "setlist_songs", force: :cascade do |t|
     t.integer "song_id", null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_10_15_204103) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "tempo"
+    t.string "singer"
   end
 
   add_foreign_key "setlist_songs", "setlists"
