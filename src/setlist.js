@@ -13,25 +13,32 @@ class Setlist {
         return Setlist.all.find(setlist => setlist.id == Id)
     }
 
+    static titleAdds(){
+        const allSetlists = document.querySelector('#all-setlists')
+        allSetlists.innerHTML = `<section class='title-section'><h3 lead text-center>Set Lists <button id='add-setlist' class='btn btn-success'>+</button><button id='print-setlist' class='btn btn-secondary'><i class="fas fa-print"></i></button></h3><section>`
+        const print = document.querySelector(`#print-setlist`)
+        print.addEventListener('click', this.printSet)
+    }
+  
     renderSetlist(setlist){
-
+        const allSetlistsDiv = document.querySelector('#all-setlists')
         const setlistDiv = document.createElement('div')
         setlistDiv.id = `setlist-${setlist.id}`
         setlistDiv.addEventListener('dragover', this.dragover_handler)
         setlistDiv.addEventListener('dragenter', this.dragenter_handler)
         setlistDiv.addEventListener('dragleave', this.dragleave_handler)
         setlistDiv.addEventListener('drop', this.drop_handler)
-        setlistDiv.className = `setlist border border-secondary rounded`
-        setlistDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p class='text-center'>${setlist.date}</p><br></div>`
+        setlistDiv.className = `border border-secondary rounded`
+        setlistDiv.innerHTML = `<div id='inner-setlist-div-${setlist.id}'><h4 class='text-center'>${setlist.name} <button id='edit-setlist-${setlist.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-setlist-${setlist.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button></h4><p>${setlist.date}</p></div>`
 
-        allSetlists.appendChild(setlistDiv)
+        allSetlistsDiv.appendChild(setlistDiv)
 
         const updateButton = document.querySelector(`#edit-setlist-${setlist.id}`)
         updateButton.addEventListener('click', this.updateSetlistForm)
         const delButton = document.querySelector(`#delete-setlist-${setlist.id}`)
         delButton.addEventListener('click', setlistsAdapter.deleteSetlist) 
         
-        this.addListeners();
+        this.addListeners(); 
     }
 
     addListeners(){
@@ -108,30 +115,27 @@ class Setlist {
     }
 
     drop_handler(e){
+        //this is the object
         e.preventDefault()
-        const song_id = e.dataTransfer.getData('text/plain');
+        //attaches to set list
+        const song_id = e.dataTransfer.getData('text/plain');//song-1
+        e.currentTarget.appendChild(document.getElementById(song_id))
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+
+        //allows switch positions
         let songSetDiv = document.getElementById(song_id)
-        if (song_id === `song-${song_id.split("-")[1]}`) {
-            e.currentTarget.appendChild(document.getElementById(song_id))
-            this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-            songSetDiv.children[4].style.display = 'none';
-            songSetDiv.children[5].style.display = 'none';
-            setlistsongsAdapter.createSetlistSong(e)
+        songSetDiv.className = 'border border-secondary rounded inset';
         
-        } else {
-            let tmp = document.createElement('div');
-            tmp.className = 'hide';
-            let drop_target = songSetDiv.nextSibling
-            let drag_target = songSetDiv
-            drop_target.before(tmp)
-            drag_target.before(drop_target)
-            tmp.replaceWith(drag_target)
-        } 
+        let drop_target = songSetDiv
+        let drag_target = document.querySelector(`#${song_id}`)
+        //let temp = document.createElement('span');
+        //temp.className = 'hide';
+        //drop_target.before(temp)
+        drag_target.before(drop_target)
+        //temp.replaceWith(drag_target);
+        setlistsongsAdapter.createSetlistSong(e)
     }
-    ondrop_handler(e){
-        e.preventDefault()
-        console.log("ondropevent", e.currentTarget)
-    }
+
     dragenter_handler(e){
         //e.preventDefault()
         this.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
@@ -157,5 +161,4 @@ class Setlist {
     
         return true;
     }
-
 }
