@@ -1,11 +1,10 @@
 class Song {
     static all = []
 
-    constructor({title, artist, key, tempo, id}){
+    constructor({title, artist, key, id}){
         this.title = title
         this.artist = artist
-        this.key = key
-        this.tempo = tempo
+        this.key = key 
         this.id = id
 
         Song.all.push(this);
@@ -14,24 +13,21 @@ class Song {
     static findById(id){
         return Song.all.find(song => song.id == id)
     }
-    
     static dragListeners(){
         allSongs.addEventListener('dragover', this.dragover_handler)
         allSongs.addEventListener('dragenter', this.dragenter_handler)
         allSongs.addEventListener('dragleave', this.dragleave_handler)
         allSongs.addEventListener('drop', this.drop_handler)
     }
-    
+    //{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
     renderSong(song){
         let songDiv = document.createElement('div')
-        songDiv.innerHTML = `<i class="fas fa-grip-vertical"></i>     
-        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <span>&#9830</span> ${song.tempo} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
+        songDiv.innerHTML = `${song.title} || ${song.artist} || ${song.key} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
-        songDiv.addEventListener('ondrop', this.ondrop_handler)
         allSongs.appendChild(songDiv);
-       
+        //buttons and listeners
         const editButton = document.querySelector(`#update-song-${song.id}`)
         editButton.addEventListener('click', this.updateSongForm, true)
         
@@ -78,7 +74,8 @@ class Song {
         submitButton.addEventListener('click', songsAdapter.createSong)
     }
 
-    updateSongForm(e){ 
+    updateSongForm(e){
+        //console.log(this) button id update song 
         let songId = parseInt(e.currentTarget.id.split("-")[2])
         let song = Song.findById(songId)
         let songDivUpdate = document.querySelector(`#song-${songId}`)
@@ -108,7 +105,7 @@ class Song {
         let updateSubmit = document.querySelector(`#update-submit-${songId}`)
         updateSubmit.addEventListener('click', songsAdapter.patchSong)
     }
-
+//{title: "At Last ", artist: " Etta James ", key: " F", id: 1}
     updateOnDom({id, title, artist, key}){
         this.id = id
         this.title = title
@@ -126,16 +123,16 @@ class Song {
     }
 
     dragstart_handler(e){
-        e.dataTransfer.setData('text/plain', e.target.id)
+        e.dataTransfer.setData('text/plain', e.target.id)//e.target.id)
         e.dataTransfer.dropEffect = 'move';
     }
 
-    // dragend_handler(e){
+    dragend_handler(e){
        
-    // }
+    }
 
 
-    //accept drops for the allSongDiv (class)
+    //accept drops
     static dragover_handler(e){
         e.preventDefault();
         e.dataTransfer.dropEffect = 'move';
@@ -145,34 +142,18 @@ class Song {
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     }
 
-    static dragenter_handler(e){
-        e.preventDefault()
-        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-    }
-
     static drop_handler(e){
         e.preventDefault()
+        debugger
         const data = e.dataTransfer.getData('text/plain');
         e.currentTarget.appendChild(document.getElementById(data))//song-id (8)
         this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        let song = document.querySelector(`#${data}`)
-        song.children[4].style.display = '';
-        song.children[5].style.display = '';
         setlistsongsAdapter.deleteSetlistSong(e)
-
-        for (div of allSongs.children){
-            console.log(div.innerText.split("♦")[0])
-        }
-        // allSongs.children.forEach(songDiv => {
-        //     console.log(songDiv.innerText.split(("♦")[0])
-        // })
-       
-        //grab everything and sort it
     }
-    //prevent drop on song instance
-    ondrop_handler(e){
-        console.log(e)
+
+    static dragenter_handler(e){
         e.preventDefault()
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
     }
     
 }
