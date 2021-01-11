@@ -50,14 +50,12 @@ class SongsAdapter {
         const title = attributes[1].value
         const artist = attributes[4].value
         const key = attributes[7].value
-        const tempo = attributes[9].value
 
         let songObj = {
             id,
             title,
             artist,
-            key,
-            tempo
+            key
         }
 
         let configObj = {
