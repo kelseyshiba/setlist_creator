@@ -121,14 +121,16 @@ class Song {
         updateSubmit.addEventListener('click', songsAdapter.patchSong)
     }
 
-    updateOnDom({id, title, artist, key}){
+    updateOnDom({id, title, artist, key, tempo, singer}){
         this.id = id
         this.title = title
         this.artist = artist
         this.key = key
+        this.tempo = tempo
+        this.singer = singer
         
         let grabSong = document.querySelector(`div#song-${this.id}`)
-        grabSong.innerHTML = `${this.title} || ${this.artist} || ${this.key} <button id='update-song-${this.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${this.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`
+        grabSong.innerHTML = `${this.title} ♦ ${this.artist} ♦ ${this.key} ♦ ${this.tempo} ♦ ${this.singer} <button id='update-song-${this.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${this.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`
 
         const editButton = document.querySelector(`#update-song-${this.id}`)
         editButton.addEventListener('click', this.updateSongForm, true)

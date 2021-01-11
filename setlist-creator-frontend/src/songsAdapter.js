@@ -15,12 +15,10 @@ class SongsAdapter {
     //CREATE
     createSong(e){
         e.preventDefault();
-        console.log(e)
         addSongButton.style.display = 'block';
         let formHide = document.querySelector('#add-form')
         formHide.style.display = 'none';
-        let songTarget = e.target.parentNode.children 
-        console.log(songTarget)
+        let songTarget = e.target.parentNode.children
         let newSong = {
             title: songTarget[1].value,
             artist: songTarget[4].value,
@@ -48,6 +46,7 @@ class SongsAdapter {
         e.preventDefault()
         const id = parseInt(e.currentTarget.id.split("-")[2])
         let attributes = e.currentTarget.parentElement.children
+        console.log(attributes)
         const title = attributes[1].value
         const artist = attributes[4].value
         const key = attributes[7].value
