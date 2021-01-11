@@ -87,11 +87,14 @@ class Song {
         let songId = parseInt(e.currentTarget.id.split("-")[2])
         let song = Song.findById(songId)
         let songDivUpdate = document.querySelector(`#song-${songId}`)
-        let songArr = e.currentTarget.parentNode.innerText.split("||");
+        let songArr = e.currentTarget.parentNode.innerText.split("♦");
+        
         let songTitle = songArr[0]
         let songArtist = songArr[1]
         let songKey = songArr[2]
-    
+        let songTempo = songArr[3]
+        let songSinger = songArr[4]
+
         let updateForm = `<br>
         <h3 text-center>Edit Song</h3>
         <hr>
@@ -102,6 +105,10 @@ class Song {
             <input type="text" name="song[artist]" class="form-control" value='${songArtist}'><br>
             <label for="song[key]">Key: </label>
             <input type="text" name="song[key]" class="form-control" value='${songKey}'><br>
+            <label for="song[tempo]">Tempo: </label>
+            <input type="text" name="song[tempo]" class="form-control" value='${songTempo}'><br>
+            <label for="song[singer]">Singer: </label>
+            <input type="text" name="song[singer]" class="form-control" value='${songSinger}'><br>
             <input id="update-submit-${songId}" type="submit" class='btn btn-success'>
         </form>`
     
