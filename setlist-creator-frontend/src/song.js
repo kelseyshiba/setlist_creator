@@ -1,11 +1,12 @@
 class Song {
     static all = []
 
-    constructor({title, artist, key, tempo, id}){
+    constructor({title, artist, key, tempo, id, singer}){
         this.title = title
         this.artist = artist
         this.key = key
         this.tempo = tempo
+        this.singer = singer
         this.id = id
 
         Song.all.push(this);
@@ -25,7 +26,7 @@ class Song {
     renderSong(song){
         let songDiv = document.createElement('div')
         songDiv.innerHTML = `<i class="fas fa-grip-vertical"></i>     
-        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <span>&#9830</span> ${song.tempo} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
+        ${song.title} <span>&#9830</span> ${song.artist} <span>&#9830</span>  ${song.key} <span>&#9830</span> ${song.tempo} <span>&#9830</span> ${song.singer} <button id='update-song-${song.id}' class='btn btn-warning'><i class="far fa-edit"></i></button><button id='delete-song-${song.id}' class='btn btn-danger'><i class="far fa-trash-alt"></i></span></button>`;
         songDiv.id = `song-${song.id}`;
         songDiv.draggable = 'true';
         songDiv.className = 'border border-secondary rounded';
