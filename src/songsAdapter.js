@@ -11,6 +11,7 @@ class SongsAdapter {
             json.data.sort(function (a, b) { if(a.attributes.title > b.attributes.title) {return 1} else if (a.attributes.title < b.attributes.title) { return -1 } return 0; }).forEach(song => new Song(song.attributes).renderSong(song.attributes))
         })
     }
+//attributes: {title: "At Last", artist: "Etta James", key: "F"}
     
     //CREATE
     createSong(e){
@@ -19,6 +20,7 @@ class SongsAdapter {
         let formHide = document.querySelector('#add-form')
         formHide.style.display = 'none';
         let songTarget = e.target.parentNode.children 
+        //attributes: {artist, key, title}}
     
         let newSong = {
             title: songTarget[1].value,
@@ -78,8 +80,8 @@ class SongsAdapter {
 
     //DELETE
     deleteSong(e){
-        let deleteId = e.currentTarget.id.split("-")[2]
-        let delSongDiv = document.querySelector(`div#song-${deleteId}`)
+        let deleteId = { id: e.target.id.split("-")[2] }
+        let delSongDiv = document.querySelector(`div#song-${e.target.id.split("-")[2]}`)
         delSongDiv.remove();
         let configObj = {
             method: 'DELETE',
@@ -90,7 +92,7 @@ class SongsAdapter {
             body: JSON.stringify(deleteId)
         }
     
-        fetch(`http://localhost:3000/songs/${deleteId}`, configObj)
+        fetch(`http://localhost:3000/songs/${parseInt(deleteId.id)}`, configObj)
         .then(resp => resp.json())
         .then(json => alert(json.message))
     }
