@@ -20,13 +20,13 @@ class SongsAdapter {
         let formHide = document.querySelector('#add-form')
         formHide.style.display = 'none';
         let songTarget = e.target.parentNode.children 
-    
+        console.log(songTarget)
         let newSong = {
             title: songTarget[1].value,
             artist: songTarget[4].value,
             key: songTarget[7].value,
-            tempo: songTarget[7].value,
-            singer: songTarget[9].value
+            tempo: songTarget[10].value,
+            singer: songTarget[13].value
         }
     
         let configObj = {
