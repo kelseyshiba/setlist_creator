@@ -73,6 +73,10 @@ class Song {
             <input type="text" name="song[artist]" class="form-control"><br>
             <label for="song[key]">Key: </label>
             <input type="text" name="song[key]" class="form-control"><br>
+            <label for="song[tempo]">Tempo: </label>
+            <input type="text" name="song[tempo]" class="form-control"><br>
+            <label for="song[singer]">Singer: </label>
+            <input type="text" name="song[singer]" class="form-control"><br>
             <input id="new-submit" type="submit" class='btn btn-success'>
         </form>`
         const submitButton = document.querySelector('#new-submit');
