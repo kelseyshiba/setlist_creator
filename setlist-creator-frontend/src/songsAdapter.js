@@ -15,6 +15,7 @@ class SongsAdapter {
     //CREATE
     createSong(e){
         e.preventDefault();
+        console.log(e)
         addSongButton.style.display = 'block';
         let formHide = document.querySelector('#add-form')
         formHide.style.display = 'none';
@@ -23,7 +24,9 @@ class SongsAdapter {
         let newSong = {
             title: songTarget[1].value,
             artist: songTarget[4].value,
-            key: songTarget[7].value
+            key: songTarget[7].value,
+            tempo: songTarget[7].value,
+            singer: songTarget[9].value
         }
     
         let configObj = {
